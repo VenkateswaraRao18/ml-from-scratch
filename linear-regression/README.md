@@ -1,106 +1,107 @@
-# Linear Regression From Scratch (Complete Guide)
+# 📈 Linear Regression From Scratch (NumPy)
 
-Author: Lakshmi Narayana Nallamothu  
-GitHub Ready • Beginner → Professional Level
+A **from-scratch implementation of Linear Regression using NumPy**, built to deeply understand the mathematics behind gradient descent while maintaining **numerical stability** and **professional code quality**.
 
----
-
-## 1. What is Linear Regression?
-
-Linear Regression is a supervised machine learning algorithm used to model the relationship between:
-
-- **Independent variable(s)** X
-- **Dependent variable** y
-
-The goal is to find a straight line that best fits the data.
+This project avoids high-level ML libraries (such as `scikit-learn`) and focuses on **core concepts, clean implementation, and best practices**.
 
 ---
 
-## 2. Mathematical Model
+## 🚀 Overview
 
-### Simple Linear Regression
+Linear Regression models the relationship between input features and a target variable using a linear function:
 
-\[
-y = mx + b
-\]
+$$
+y = wx + b
+$$
 
 Where:
 
-- m = slope (weight)
-- b = bias (intercept)
+- **w** → weight (slope)
+- **b** → bias (intercept)
 
-### Multiple Linear Regression
-
-\[
-y = w_1x_1 + w_2x_2 + ... + w_nx_n + b
-\]
-
-Vector form:
-\[
-\hat{y} = Xw + b
-\]
+The model is trained by minimizing **Mean Squared Error (MSE)** using **Gradient Descent**.
 
 ---
 
-## 3. Why Do We Need a Loss Function?
+## 🎯 Objectives
 
-To measure how wrong our predictions are.
-
-### Mean Squared Error (MSE)
-
-\[
-MSE = L=n1​i=1∑n​(yi​−y^​i​)2
-\]
-
-- Penalizes large errors
-- Differentiable → good for optimization
+- Implement Linear Regression **from scratch**
+- Understand **loss functions and gradient computation**
+- Avoid **numerical overflow and instability**
+- Use **vectorized NumPy operations**
+- Build code suitable for **professional review and interviews**
 
 ---
 
-## 4. Optimization: Gradient Descent
+## 🧠 Mathematical Foundation
 
-We minimize MSE by updating weights step by step.
+### Model Prediction
 
-### Gradients
+$$
+\hat{y} = wx + b
+$$
 
-\[
-\frac{\partial MSE}{\partial w} = -\frac{2}{n} X^T (y - \hat{y})
-\]
+---
 
-\[
-\frac{\partial MSE}{\partial b} = -\frac{2}{n} \sum (y - \hat{y})
-\]
+### Loss Function (Mean Squared Error)
 
-### Update Rules
-
-\[
-w = w - \alpha \cdot dw
-\]
-
-\[
-b = b - \alpha \cdot db
-\]
+$$
+L = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
 
 Where:
 
-- α = learning rate
+- \( y_i \) is the actual value
+- \( \hat{y}\_i \) is the predicted value
+- \( n \) is the number of samples
 
 ---
 
-## 5. Algorithm Steps (Plain English)
+## 📐 Gradient Computation
 
-1. Initialize weights = 0, bias = 0
-2. Predict y using current parameters
-3. Calculate error (loss)
-4. Compute gradients
-5. Update parameters
-6. Repeat until convergence
+To minimize the loss, we compute partial derivatives of the loss function.
+
+### Gradient with respect to weight \( w \)
+
+$$
+\frac{\partial L}{\partial w} =
+\frac{2}{n} \sum_{i=1}^{n} x_i (\hat{y}_i - y_i)
+$$
 
 ---
 
-## 6. Python Implementation (From Scratch)
+### Gradient with respect to bias \( b \)
+
+$$
+\frac{\partial L}{\partial b} =
+\frac{2}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)
+$$
+
+---
+
+## 🔄 Parameter Update Rules (Gradient Descent)
+
+$$
+w = w - \alpha \frac{\partial L}{\partial w}
+$$
+
+$$
+b = b - \alpha \frac{\partial L}{\partial b}
+$$
+
+Where:
+
+- \( \alpha \) is the **learning rate**
+
+---
+
+## 🧪 Dataset Generation
 
 ```python
-y_pred = np.dot(X, weights) + bias
-loss = np.mean((y - y_pred) ** 2)
+import numpy as np
+
+np.random.seed(0)
+
+X = np.random.rand(100, 1) * 10
+y = 3 * X + 5 + np.random.randn(100, 1)
 ```
