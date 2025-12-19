@@ -1,9 +1,9 @@
 """
 Linear Regression from Scratch (No ML libraries)
 
-Author: Lakshmi Narayana Nallamothu
+Author: venkateswaraRao jannegorla
 Purpose:
-- Implement Linear Regression using Gradient Descent
+- Implementing Linear Regression using Gradient Descent
 - Understand math + code clearly
 - Beginner friendly but professional quality
 """
