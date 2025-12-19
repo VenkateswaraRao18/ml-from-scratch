@@ -49,7 +49,7 @@ To measure how wrong our predictions are.
 ### Mean Squared Error (MSE)
 
 \[
-MSE = \frac{1}{n} \sum (y - \hat{y})^2
+MSE = L=n1​i=1∑n​(yi​−y^​i​)2
 \]
 
 - Penalizes large errors
