@@ -105,3 +105,88 @@ np.random.seed(0)
 X = np.random.rand(100, 1) * 10
 y = 3 * X + 5 + np.random.randn(100, 1)
 ```
+
+## ⚙️ Feature Scaling (Critical for Stability)
+
+Feature normalization prevents numerical overflow and speeds up convergence:
+
+```python
+
+X = (X - X.mean()) / X.std()
+
+```
+
+## 🏗️ Model Initialization
+
+```python
+w = 0.0
+b = 0.0
+learning_rate = 0.01
+n = len(X)
+
+```
+
+## 🔁 Training Loop (Gradient Descent)
+
+```python
+for epoch in range(1000):
+
+    # Forward pass
+    y_pred = w * X + b
+
+    # Error
+    error = y_pred - y
+
+    # Gradients
+    dw = (2 / n) * np.sum(X * error)
+    db = (2 / n) * np.sum(error)
+
+    # Parameter update
+    w -= learning_rate * dw
+    b -= learning_rate * db
+
+    # Monitor loss
+    if epoch % 100 == 0:
+        loss = np.mean((y - y_pred) ** 2)
+        print(f"Epoch {epoch}, Loss: {loss:.4f}")
+
+```
+
+## 📉 Loss Interpretation
+
+- High loss → poor predictions
+
+- Decreasing loss → model learning correctly
+
+- Exploding loss / NaNs → learning rate too high or missing normalization
+
+## 🧮 Vectorized NumPy Implementation
+
+A more scalable and NumPy-idiomatic version:
+
+```python
+w = np.zeros((1,))
+b = 0.0
+
+for _ in range(1000):
+    y_pred = X.dot(w) + b
+    error = y_pred - y
+
+    dw = (2 / n) * X.T.dot(error)
+    db = (2 / n) * np.sum(error)
+
+    w -= learning_rate * dw
+    b -= learning_rate * db
+
+```
+
+## 📊 Validation Check
+
+```python
+initial_loss = np.mean((y - (0 * X + 0)) ** 2)
+final_loss = np.mean((y - (w * X + b)) ** 2)
+
+print("Initial Loss:", initial_loss)
+print("Final Loss:", final_loss)
+
+```
